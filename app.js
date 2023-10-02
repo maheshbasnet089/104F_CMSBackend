@@ -73,7 +73,7 @@ app.get("/blogs/:id",async (req,res)=>{
 
 
 // CREATE BLOG API  
-app.post("/createBlog",async (req,res)=>{
+app.post("/blogs", async(req,res)=>{
    const title = req.body.title;
    const subTitle = req.body.subTitle
    const description = req.body.description
@@ -87,6 +87,7 @@ app.post("/createBlog",async (req,res)=>{
         subTitle : subTitle,
         description : description
     })
+    
 
     res.json({
         status : 201,
@@ -97,6 +98,45 @@ app.post("/createBlog",async (req,res)=>{
     //     message : "Blog created successfully"
     // })
 })
+
+
+
+// UPDATE BLOG API 
+app.patch("/blogs/:id",async (req,res)=>{
+    const id = req.params.id
+    const title = req.body.title
+    const subTitle = req.body.subTitle
+    const description = req.body.description
+    
+    // const {title,subTitle,description} = req.body  ALTERNATIVE
+    
+
+    await Blog.findByIdAndUpdate(id,{
+        title : title,
+        subTitle : subTitle,
+        description : description
+    })
+
+    res.status(200).json({
+        message : "Blog updated Succesfully"
+    })
+
+})
+
+// DELETE API 
+app.delete("/blogs/:id",async (req,res)=>{
+    const id = req.params.id
+    // const {id} = req.params 
+
+    await Blog.findByIdAndDelete(id)
+
+    res.status(200).json({
+        message : "Blog Deleted Successfully"
+    })
+})
+
+
+
 
 app.listen(2000,()=>{
     console.log("Nodejs has started at port 2000")
