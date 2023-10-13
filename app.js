@@ -81,7 +81,7 @@ app.get("/blogs/:id",async (req,res)=>{
 // CREATE BLOG API  
 app.post("/blogs", async(req,res)=>{
    const title = req.body.title;
-   const subTitle = req.body.subTitle
+   const subTitle = req.body.subTitle 
    const description = req.body.description
 
 //    Alternative (object destructuring)
@@ -95,8 +95,8 @@ app.post("/blogs", async(req,res)=>{
     })
     
 
-    res.json({
-        status : 201,
+    res.status(201).json({
+      
         message : "Blog created succesfully"
     })
     // Alternative 
